@@ -5,7 +5,7 @@ import java.lang.ref.WeakReference;
 public class GCScope 
 {
 	GCScope t;
-    int i;
+    public int i;
 
     public GCScope(int i)
     {
@@ -33,19 +33,22 @@ public class GCScope
 		t2 = null;		
 		// No Object Is Eligible for GC (t3.t.t still has a reference to t2)
 		System.gc();
+		System.out.println(t3.t.t.i);
 
 		System.out.println("Third attempt to GC");
 		t3 = null;
-		// All the 3 Object Is Eligible for GC (None of them have a reference.
+		// All the 3 Objects are eligible for GC (None of them have a reference.
 		// only the variable t of the objects are referring each other in a
 		// rounded fashion forming the Island of objects with out any external
 		// reference)
 		System.gc();
 		
 		String str = new String("hello world");
-		WeakReference<String> ref = new WeakReference<String>(str); // ref count for str not incremented
+		// ref count for str not incremented
+		WeakReference<String> ref = new WeakReference<String>(str);
 		// String s1 = str; // ref count for str increases
 		str = null;
+		System.out.println("outside if: " + str + " " + ref.get());
 	    if (ref != null) 
 	    {
 	    	// if there is no weak ref and only s1 was present, then making str=null 
@@ -58,6 +61,6 @@ public class GCScope
 
 	protected void finalize() 
 	{
-		System.out.println("Garbage collected from object" + i);
+		System.out.println("GC Message: Garbage collected from object" + i);
 	}
 }

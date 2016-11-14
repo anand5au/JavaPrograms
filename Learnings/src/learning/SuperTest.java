@@ -3,18 +3,18 @@ package learning;
 class SuperBase
 {
 	static final int bfinal;
-	
+
 	static
 	{
 		bfinal = 10; // can be done only here
-		System.out.println("Super Base static");
+		System.out.println("Base static");
 	}
 
 	public SuperBase()
 	{
-		System.out.println("Super Base");
+		System.out.println("Base constructor");
 	}
-	
+
 	{
 		System.out.println("base Instance Initializer " + bfinal);
 	}
@@ -26,13 +26,13 @@ public class SuperTest extends SuperBase
 
 	static
 	{
-		System.out.println("Super Test static");
+		System.out.println("Derived static");
 	}
 
 	public SuperTest()
 	{
 		dfinal = 10; // can be done only here
-		System.out.println("Super Test");
+		System.out.println("Derived constructor");
 	}
 
 	{

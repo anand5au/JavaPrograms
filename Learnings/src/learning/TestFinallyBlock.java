@@ -8,8 +8,8 @@ class TestFinallyBlock
 		{
 			int data = 25 / 10;
 			System.out.println(data);
-			// System.exit(0); -- no finally
-			// return; - finally executes
+			// System.exit(0); // no finally
+			return; // finally executes
 		}
 		catch (ArithmeticException e)
 		{

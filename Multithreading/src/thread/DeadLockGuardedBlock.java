@@ -1,9 +1,14 @@
+package thread;
+
 class DeadLockGuardedBlock
 {
 	static class Friend
 	{
 		private final String name;
-		public boolean bowing;
+
+		public volatile boolean bowing;
+		// if bowing is not volatile, the thread uses its working copy in
+		// "while(bowing);" which will never see the updated value
 
 		public Friend(String name)
 		{
@@ -18,9 +23,9 @@ class DeadLockGuardedBlock
 
 		public void bow(Friend bower)
 		{
-		    while(bower.bowing);
-			
-		    bowing = true;
+			while (bower.bowing);
+
+			bowing = true;
 			System.out.format("%s: %s" + "  has bowed to me!%n", this.name, bower.getName());
 			bower.bowBack(this);
 			bowing = false;
@@ -38,14 +43,16 @@ class DeadLockGuardedBlock
 		final Friend gaston = new Friend("Gaston");
 		new Thread(new Runnable()
 		{
+			@Override
 			public void run()
 			{
 				alphonse.bow(gaston);
 			}
 		}).start();
-		
+
 		new Thread(new Runnable()
 		{
+			@Override
 			public void run()
 			{
 				gaston.bow(alphonse);
