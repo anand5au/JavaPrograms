@@ -7,7 +7,10 @@ public class Singleton
 	private Singleton()
 	{
 		// to prevent instantiation via reflection
-		if (singleton != null) { throw new InstantiationError("Singleton object can be instantiated more than once!"); }
+		if (singleton != null)
+		{
+			throw new InstantiationError("Singleton object can be instantiated more than once!");
+		}
 	}
 
 	public static Singleton getInstance() // double checked locking
@@ -20,11 +23,6 @@ public class Singleton
 					singleton = new Singleton();
 			}
 		}
-		return singleton;
-	}
-
-	private Object readResolve()
-	{
 		return singleton;
 	}
 

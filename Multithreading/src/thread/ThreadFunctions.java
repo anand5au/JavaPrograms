@@ -1,5 +1,7 @@
 package thread;
 
+import java.util.ArrayList;
+
 public class ThreadFunctions implements Runnable
 {
 	private String name;
@@ -9,6 +11,7 @@ public class ThreadFunctions implements Runnable
 		this.name = name;
 	}
 
+	@Override
 	public void run()
 	{
 		for (int i = 0; i < 100; i++)
@@ -24,6 +27,7 @@ public class ThreadFunctions implements Runnable
 			}
 			System.out.println(name + " loop number: " + i);
 		}
+
 	}
 
 	public static void main(String[] args) throws InterruptedException
@@ -60,6 +64,15 @@ public class ThreadFunctions implements Runnable
 		for (int i = 0; i < 100; i++)
 		{
 			System.out.println("Main Thread loop number " + i);
+		}
+
+		ArrayList<Integer> ar = new ArrayList<Integer>();
+		ar.add(0);
+		ar.add(8);
+		for (int a : ar)
+		{
+			if (a == 8)
+				ar.remove(0);
 		}
 
 	}
